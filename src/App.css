@@ -1,0 +1,143 @@
+.App {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* .slide-left {
+  animation: slideLeft 1s forwards;
+  transform: translateX(-135%);
+} */
+
+.main-heading {
+  margin: 20px;
+  color: #37ff00;
+  max-width: 1080px;
+}
+
+.nav-button:hover {
+  color: #ff6600;
+}
+
+.loader {
+  --s: 25px;
+  --g: 5px;
+
+  width: calc(3 * (1.353 * var(--s) + var(--g)));
+  display: grid;
+  justify-items: end;
+  aspect-ratio: 3;
+  overflow: hidden;
+  --_m: linear-gradient(90deg, #0000, #000 15px calc(100% - 15px), #0000);
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+}
+.loader:before {
+  content: "";
+  width: calc(4 * 100% / 3);
+  background: conic-gradient(
+    from -90deg at var(--s) calc(0.353 * var(--s)),
+    #dc1fff 135deg,
+    #dc1fff 0 270deg,
+    #dc1fff 0
+  );
+  --_m: linear-gradient(
+      to bottom right,
+      #0000 calc(0.25 * var(--s)),
+      #000 0 calc(100% - calc(0.25 * var(--s)) - 1.414 * var(--g)),
+      #0000 0
+    ),
+    conic-gradient(
+      from -90deg at right var(--g) bottom var(--g),
+      #000 90deg,
+      #0000 0
+    );
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  background-size: calc(100% / 4) 100%;
+  -webkit-mask-size: calc(100% / 4) 100%;
+  mask-size: calc(100% / 4) 100%;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  animation: l8 10s infinite linear;
+}
+@keyframes l8 {
+  to {
+    transform: translate(calc(100% / 4));
+  }
+}
+
+.img {
+  min-width: 90px;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  box-shadow: 0 3px 0 0 rgb(255, 255, 255);
+}
+
+img.na {
+  opacity: 1;
+  box-shadow: 0 3px 0 0 rgb(255, 255, 255);
+}
+
+.feeter {
+  width: 80%;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.feeter p {
+  color: white;
+}
+
+.leaderboard-button {
+  width: 36px;
+  height: auto;
+  display: block;
+  margin: auto;
+  color: white;
+  position: relative;
+  cursor: not-allowed;
+}
+
+.icons-container {
+  display: flex;
+  gap: 20px;
+}
+.tooltip-icon {
+  width: 320%;
+  bottom: 95%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.leaderboard-button:hover .tooltip-icon {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-button {
+  width: 104px;
+}
+
+.nav-button:hover {
+  color: #ff6600;
+}

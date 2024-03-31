@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="-1" />
+  <title>NODEAPES ◉</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+    integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+ 
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://fonts.cdnfonts.com/css/edit-undo-brk" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/comic-mono@0.0.1/index.css">
+  
+
+</head>
+
+<body>
+  
+  <div id="home"></div>
+  <nav class="backdrop-filter backdrop-blur-md sticky z-50 top-0">
+    <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="#home" class="flex">
+        <img src="./logo.png" class="h-10 nav-button" style="margin-left: 12px; border-radius: 4px;"/>
+      </a>
+      <div class="loader" style="margin-top:10px"></div>
+      <a href="https://twitter.com/thenodeapes" target="_blank" style="margin-right: 12px;">
+      <img src="x.png" alt="Twitter Logo" style="width: 36px; height: auto; display: block; margin: auto;">
+    </a>
+
+    </div>
+  </nav>
+
+  
+  <div id="how-to" class="main">
+    <div class="hello text-center text-3xl md:text-4xl lg:text-4xl" style="margin: 20px; color:#37ff00;"><b>NODEAPES</b></div> 
+
+    <div class="hello text-center text-1xl md:text-2xl lg:text-2xl" style="margin: 20px; color:#ffffff;">A collection of APES living in NODES <br> rewards you <u>RUNES</u> on <a style="color: #FF9900;">BITCOIN</a> </div>  
+    
+   <br> 
+
+    <div class="hello text-center text-1xl md:text-1xl lg:text-1xl" style="color:#ffffff;"><b>[BUY ON]</b> </div>
+    <div class="flex flex-wrap items-center justify-center mx-auto p-0">
+    </div>
+
+  <div class="flex flex-wrap items-center justify-center mx-auto p-1">
+    <a href="https://magiceden.io/ordinals/marketplace/nodeapes" target="_blank"><button type="submit">
+      <img src="./me.png" class="h-20 nav-button" style="margin-left: 2x; border-radius: 4px;"/>
+    </button></a>
+  </div>
+
+
+    <script> 
+       // Converting string to required date format 
+            let deadline = new Date("Jan 11, 2024 19:30:00")
+                            .getTime();
+ 
+            // To call defined fuction every second
+            let x = setInterval(function () {
+                 
+                // Getting current time in required format
+                let now = new Date().getTime();
+ 
+                // Calculating the difference
+                let t = deadline - now;
+ 
+                // Getting value of days, hours, minutes, seconds
+                let days = Math.floor(t / (1000 * 60 * 60 * 24));
+                let hours = Math.floor(
+                    (t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor(
+                    (t % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor(
+                    (t % (1000 * 60)) / 1000);
+ 
+                // Output the remaining time
+                document.getElementById("timer_div").innerHTML =
+                    days + "d " + hours + "h " + 
+                    minutes + "m " + seconds + "s ";
+ 
+                // Output for over time
+                if (t < 0) {
+                    clearInterval(x);
+                    document.getElementById("timer_div")
+                            .innerHTML = "SALE OVER";
+                }
+            }, 1000);
+
+
+    </script>
+
+    
+
+    <br>
+      <div class="hello text-center text-1xl md:text-1xl lg:text-1xl" style="margin: 2px; color:#ffffff;">POWERED BY</div>  
+      <div class="flex flex-wrap items-center justify-center mx-auto p-1">
+    <a href="https://cybord.org/#introduction" target="_blank"><button type="submit">
+      <img src="./cybord.png" class="h-8 nav-button" style="margin-left: 2px; border-radius: 4px;"/>
+    </button></a>
+  </div>
+
+    <br>
+  </div>
+
+
+    <button class="accordion text-2xl font-large">read [LITEPAPER] v1.0</button>
+    <div class="panel">
+      <br>
+            <li style="color:#ed1e2c;"><b>INTRODUCTION</b></li>
+            <li style="color:#ffffff;">NODEAPES is an ordinals collection of apes living in nodes, rewards hodler runes on bitcoin and are powered by CBRC-20 metaprotocol. </li>
+            <br>
+
+            <li style="color:#ed1e2c;"><b>LORE</b></li>
+            <li style="color:#ffffff;">An enigmatic journey has begun, 10,000 apes has entered nodes, successfully cracking the code of a mammoth Runic Enigma through their unwavering unity, unlocking access to powerful Runic Miners made with a purpose to secure runes for their community, which will be etched when rune protocol launches on Bitcoin. Let the halving games begin. </li>
+            <br>
+
+            <li style="color:#ed1e2c;"><b>ECOSYSTEM</b></li>
+            <li style="color:#ffffff;"> <a>ART COLLECTION: pfp ordinals with programmed traits.</a></li>
+            <li style="color:#ffffff;"> <a>RUNIC ENIGMA: mines runes for hodler on bitcoin using runic miners.</a></li>
+            <li style="color:#ffffff;"> <a>ECONOMY: powered by CBRC-20 metaprotocol.</a></li>
+            <br>
+
+            <li style="color:#ed1e2c;"><b>RULES</b></li>
+            <li style="color:#ffffff;"> <a>1. Each NODEAPE inscription comes with a RUNIC MINER and CBRC-20 tokens to participate in the economy.</a></li>
+            <li style="color:#ffffff;"> <a>2. Runic miner is automatically activated at a blockheight of 833,000 and starts mining runes.</a></li>
+            <li style="color:#ffffff;"> <a>3. Runes will be allocated to an address with runic miner per bitcoin block until supply is fully allocated.</a></li>
+            <li style="color:#ffffff;"> <a>4. Runes will be allocated based on NORMAL mode paired with RARITY, JUGGERNAUT and HALVENING modes of operation.</a></li>
+            <li style="color:#ffffff;"> <a>5. Accumulated runes will be distributed once runes protocol launches on bitcoin.</a></li>
+            <br>
+
+
+            <li style="color:#ed1e2c;"><b>ALLOCATION OF RUNES:</b></li>
+            <li style="color:#ffffff;"> <a>NORMAL: a fixed reward of 10 runes per block per runic miner.</a></li>
+            <li style="color:#ffffff;"> <a>+RARITY: rarer the ape, more runes a runic miner can mine per block. Rarity rank range of ape = #[1-100] = 20 | #[101-1000] = 10 | #[1001-2000] = 9 ... #[9001-10000] = 1 rune.</a></li>
+            <li style="color:#ffffff;"> <a>+JUGGERNAUT: a boosted reward of 10 more runes per block after ape drinks juggernaut which will be activated automatically at blockheight 834,000 and requires maintaining a balance of 100 CYBD (CBRC-20) tokens per ape per miner to keep boosting.</a></li>
+            <li style="color:#ffffff;"> <a>+HALVENING: at blockheight of 840,000, 100 random apes holding atleast 1 runic miner gets 10% of runes supply allocated.</a></li>
+            <br>
+
+            <li style="color:#ed1e2c;"><b>TOKENOMICS</b></li>
+            <li style="color:#ffffff;"> <a>RUNE TOKENS: 10,000,000,000 [allocation is variable and happens once per bitcoin block]</a></li>
+            <li style="color:#ffffff;"> <a>CBRC-20 TOKENS: 10,000,000 [allocation is fixed and happens once per NODEAPE]</a></li>
+            <br>
+            
+            <li style="color:#ed1e2c;"><b>RUNES PROTOCOL INTRODUCTION</b></li>
+            <li style="color:#ffffff;">Ordinals creator Casey Rodarmor proposed the new protocol in September 2023, pitching it as a better and simpler alternative to the experimental BRC-20 standard for fungible tokens. Runes are fungible tokens issued directly on Bitcoin using the Runes protocol. </li>
+            <br>
+
+            <li style="color:#ed1e2c;"><b>CBRC-20 Metaprotocol INTRODUCTION</b></li>
+            <li style="color:#ffffff;">Cy[bord] CBRC-20 is an efficient Metaprotocol standard on Bitcoin Ordinals that allows merging of image and tokens in one single inscription to ensure provenance.</li>
+            <br>
+
+            <li style="color:#ed1e2c;"><b>INSCRIPTIONS</b></li>
+            <li style="color:#ffffff;"> <a>1. ART COLLECTION SNEAK PEEKS</a></li>
+            <li style="color:#ffffff;"> <a>> a9d15fe4488ca19ad00e64e8457be150be40a752619cc2e4ffee11ef1b3f8855i0</a></li>
+            <li style="color:#ffffff;"> <a>> 34f9a88d56dbd2b42b3746c6508055f1c0ac0e498695b97700037f643998e3c4i0</a></li>
+            <li style="color:#ffffff;"> <a>> 73d6c36d9a2cd757839fa66ab402be31551edb99846d0304b56e3f324e5ae8f5i0</a></li>
+            <li style="color:#ffffff;"> <a>> c8e7a31f24518104f1828f338b47ced635c85ec997821d1e53a619a2484e50a1i0</a></li>
+            <li style="color:#ffffff;"> <a>> 3ce8278ad2851d9eff1758e190e57cf2851d11404c3e976ec688472631f8d350i0</a></li>
+            <br>
+            <li style="color:#ffffff;"> <a>2. RUNIC ENIGMA</a></li>
+            <li style="color:#ffffff;"> <a>> a9d15fe4488ca19ad00e64e8457be150be40a752619cc2e4ffee11ef1b3f8855i0</a></li>
+            <br>
+            <li style="color:#ffffff;"> <a>3. RUNIC MINERS</a></li>
+            <li style="color:#ffffff;"> <a>> See child inscriptions of RUNIC ENIGMA</a></li>
+            <br>
+            <li style="color:#ffffff;"> <a>4. RUNIC MINERS</a></li>
+            <li style="color:#ffffff;"> <a>> b6a042f885fbdd8b003abf10f070115a2b75869bf7599f5637277858cb9a3789i0</a></li>
+            <br>
+
+            <li style="color:#ed1e2c;"><b>BEGIN YOUR JOURNEY</b></li>
+            <li style="color:#ffffff;"> <a>You can reserve your CBRC-20 NodeApe inscriptions via Magic Eden.</a></li>
+            <li style="color:#ffffff;"> <a>Each inscription comes with an Ordinal PFP, a RUNIC MINER and CBRC-20 tokens.</a></li>
+            <li style="color:#ffffff;"> <a>Your inscriptions gets delivered to your BTC taproot wallet address during distribution period for each round.</a></li>
+            <br>
+
+            <a class="hello text-center text-1xl md:text-1xl lg:text-1xl" style="color:#ffffff; text-align: center;">ᚱᛖᛃᛖᚲᛏ ᚨᚢᛏᚺᛟᚱᛁᛏᛁ</a>
+        
+
+
+    </div>
+
+     
+  </div>
+   
+
+  <div id="toastBox"></div>
+
+  <div id="the-toshis" class="main">
+    <br>
+    <div class="flex flex-wrap items-center justify-center mx-auto p-4">
+    <span class="dot-black"></span>
+    <a style="margin-left: 6px; color:#ffffff;">Gallery</a>
+    </div>
+
+    <div class="products grid grid-cols-3 md:grid-cols-7 lg:grid-cols-9 xl:grid-cols-10 pt-6 gap-6 px-10"
+      id="thumbnails">
+
+    </div>
+  </div>
+  <br>
+  <div class="navnum text-center" id="nav"></div>
+
+  <footer class="feeter">
+    
+    <p class="text-1xl" style="color: #ffffff;"> <a href="">Made by Ordilabs 2024</a></p>
+  </footer>
+
+  <script>
+     
+    </script>
+  <script src="script.js?version=6"></script>
+</body>
+
+</html>
