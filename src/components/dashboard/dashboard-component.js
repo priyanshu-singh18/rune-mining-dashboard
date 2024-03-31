@@ -105,7 +105,10 @@ const DashboardComponent = () => {
       setDashboardState("global");
       setBlockNumber(response["data"]["last_updated_block"]);
       setPercentage(
-        ((response["data"]["last_updated_block"] / 840000) * 100).toFixed(2)
+        (
+          ((840000 - response["data"]["last_updated_block"]) / 20000) *
+          100
+        ).toFixed(2)
       );
       setRemainingDays(
         ((840000 - response["data"]["last_updated_block"]) / 144).toFixed()
@@ -163,7 +166,7 @@ const DashboardComponent = () => {
       });
       data.push({
         label: "claimed",
-        value: "-",
+        value: "o",
       });
       data.push({
         label: "rank",
