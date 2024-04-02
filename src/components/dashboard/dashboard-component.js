@@ -4,11 +4,34 @@ import "./dashboard-component.css";
 import Loader from "../loader/loader";
 import { toast } from "react-toastify";
 import "../progress-bar/progress-bar.scss";
-const NumberBlock = ({ label, value }) => {
+import gemImage from "../../images/gem.png";
+import potionImage from "../../images/potion.png";
+const NumberBlock = ({
+  label,
+  value,
+  dashboardState,
+  gemCount,
+  potionCount,
+}) => {
   return (
     <div className="number-block border-gray">
-      <span className="text-lg">{label}</span>
-      <p className="text-base">{value}</p>
+      <span className="text-lg dashboard-label">
+        <span>{label}&nbsp;</span>
+      </span>
+      {dashboardState === "global" && label === "boosting" ? (
+        <div className="dashboard-icon-container mt-3">
+          <div className="dashboard-icon-item">
+            <img src={gemImage} alt="gem"></img>
+            <span>- {gemCount} |&nbsp;</span>
+          </div>
+          <div className="dashboard-icon-item">
+            <img src={potionImage} alt="potion"></img>
+            <span>- {potionCount}</span>
+          </div>
+        </div>
+      ) : (
+        <p className="text-base">{value}</p>
+      )}
     </div>
   );
 };
@@ -74,26 +97,38 @@ const DashboardComponent = () => {
       data.push({
         label: "total mined",
         value: response["data"]["total_runes_mined"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "holders",
         value: response["data"]["total_wallets"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "boosting",
         value: 3,
+        gemCount: 2,
+        potionCount: 3,
       });
       data.push({
         label: "avg per block",
         value: response["data"]["total_runes_mined"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "avg per wallet",
         value: response["data"]["avg_runes_per_wallet"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "avg per miner",
         value: response["data"]["avg_runes_per_miner"],
+        gemCount: null,
+        potionCount: null,
       });
       return data;
     };
@@ -130,30 +165,44 @@ const DashboardComponent = () => {
       data.push({
         label: "mined",
         value: response["data"]["data"]["runes"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "claimed",
         value: response["data"]["data"]["claimedRunes"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "boosters",
         value: response["data"]["data"]["miners"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "apes",
         value: response["data"]["data"]["apes"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "miners",
         value: response["data"]["data"]["miners"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
-        label: "cybd",
+        label: "$cybd",
         value: response["data"]["data"]["cbrc"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "wallet address",
         value: response["data"]["data"]["id"],
+        gemCount: null,
+        potionCount: null,
       });
       return data;
     };
@@ -163,18 +212,26 @@ const DashboardComponent = () => {
       data.push({
         label: "mined",
         value: response["data"]["data"]["runes"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "claimed",
         value: "o",
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "rank",
         value: response["data"]["data"]["rank"],
+        gemCount: null,
+        potionCount: null,
       });
       data.push({
         label: "inscription id",
         value: response["data"]["data"]["id"],
+        gemCount: null,
+        potionCount: null,
       });
       return data;
     };
@@ -186,11 +243,11 @@ const DashboardComponent = () => {
       if (response["data"]["key"] === "wallet") {
         setDashboardState("wallet");
         setDashboardData(await setWalletData(response));
-        toast.success("Wallet Stats fetched sucessfully");
+        toast.success("Wallet stats fetched sucessfully");
       } else if (response["data"]["key"] === "miner") {
         setDashboardState("miner");
         setDashboardData(await setMinerData(response));
-        toast.success("Miner Stats fetched sucessfully");
+        toast.success("Miner stats fetched sucessfully");
       } else {
         console.error("Error searching:", "Wrong Input");
       }
@@ -209,13 +266,12 @@ const DashboardComponent = () => {
 
   return (
     <div className="container">
-      <div className="dashboard border-red">
+      <div className="dashboard border-gray  backdrop-filter backdrop-blur-md">
         <div className="dashboard-heading text-center text-3xl md:text-4xl lg:text-4xl">
           🔨 RUNES MINING DASHBOARD 🔨
         </div>
         <div className="dashboard-heading-2 text-center text-2xl">
-          <span>🔨 RUNES 🔨</span>
-          <span> MINING </span>
+          <span>🔨 RUNES MINING 🔨</span>
           <span>DASHBOARD </span>
         </div>
         {loading ? (
@@ -229,7 +285,11 @@ const DashboardComponent = () => {
                   <span className="countdown-heading-1">
                     countdown to halving{" "}
                   </span>
-                  <span> [~{remainingDays} days remaining]</span>
+                  <span className="countdown-heading-2">to halving </span>
+                  <span className="remaining-days">
+                    {" "}
+                    [~{remainingDays} days remaining]
+                  </span>
                 </div>
                 <div className="days-label">[{blockNumber}/840000]</div>
               </div>
@@ -255,7 +315,7 @@ const DashboardComponent = () => {
                 }}
               />
               <button
-                className="switch-button font-bold"
+                className="switch-button font-bold border-gray"
                 onClick={() => handleSearch(searchQuery)}
               >
                 check
@@ -274,13 +334,16 @@ const DashboardComponent = () => {
                   key={index}
                   label={item["label"]}
                   value={item["value"]}
+                  gemCount={item["gemCount"]}
+                  potionCount={item["potionCount"]}
+                  dashboardState={dashboardState}
                 />
               ))}
             </div>
             {dashboardState === "wallet" ? (
               <div className="claim-container mt-4">
                 <button className="btn-claim text-2xl font-bold" disabled>
-                  claim runes A
+                  claim ᚱunes
                   <span className="tooltip absolute bg-gray-800 text-white text-xs px-2 py-1 rounded">
                     claim will open after bitcoin halving
                   </span>
@@ -292,23 +355,27 @@ const DashboardComponent = () => {
           </div>
         )}
       </div>
-      <div class="accordion-container">
-        <button
-          class={`accordion sm:text-xl md:text-2xl  lg:text-2xlfont-large ${
-            toggleInfo ? "active" : ""
-          }`}
-          onClick={() => {
-            setToggleInfo(!toggleInfo);
-          }}
-        >
-          MINER TIMELINE
-        </button>
-        <div
-          className={`panel ${toggleInfo ? "display-block" : "display-none"}`}
-        >
-          this feature is coming soon...
+      {dashboardState === "wallet" ? (
+        <div class="accordion-container">
+          <button
+            class={`accordion sm:text-xl md:text-2xl  lg:text-2xlfont-large ${
+              toggleInfo ? "active" : ""
+            }`}
+            onClick={() => {
+              setToggleInfo(!toggleInfo);
+            }}
+          >
+            miner timeline
+          </button>
+          <div
+            className={`panel ${toggleInfo ? "display-block" : "display-none"}`}
+          >
+            this feature is coming soon...
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
