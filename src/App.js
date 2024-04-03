@@ -5,8 +5,10 @@ import x from "./x.png";
 import logo from "./logo.png";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+
 function App() {
   const [animateHeading, setAnimateHeading] = useState(false);
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
   // useEffect(() => {
   //   // Trigger animation on component mount
   //   setAnimateHeading(true);
@@ -59,6 +61,49 @@ function App() {
                 }}
               />
             </a>
+          </div>
+          <div className="hamburger-menu">
+            {hamburgerOpen ? (
+              <span
+                class="material-symbols-outlined hamburger-icon relative hamburger-menu-icon"
+                onClick={() => {
+                  setHamburgerOpen(false);
+                }}
+              >
+                close
+                <div className="hamburger-menu-container  text-white text-xs ">
+                  <a href="https://www.sendnodeapes.com/">home</a>
+                  <a href="#">leaderboard</a>
+                  <a
+                    href="https://twitter.com/thenodeapes"
+                    target="_blank"
+                    style={{ "margin-right": "12px" }}
+                  >
+                    <img
+                      src={x}
+                      alt="Twitter Logo"
+                      style={{
+                        width: "36px",
+                        height: "auto",
+                        display: "block",
+                        margin: "auto",
+                      }}
+                    />
+                  </a>
+                  <div class="backdrop"></div>
+                </div>
+                <div class="backdrop"></div>
+              </span>
+            ) : (
+              <span
+                class="material-symbols-outlined"
+                onClick={() => {
+                  setHamburgerOpen(true);
+                }}
+              >
+                menu
+              </span>
+            )}
           </div>
         </div>
       </nav>

@@ -141,3 +141,63 @@ img.na {
 .nav-button:hover {
   color: #ff6600;
 }
+
+.hamburger-menu {
+  color: white;
+  cursor: pointer;
+  transition: 1s;
+  display: none;
+}
+
+/* .hamburger-icon{
+  pos
+
+} */
+.hamburger-menu-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 200px;
+  height: 120px;
+  right: 0px;
+  top: 30px;
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: "Major Mono Display", monospace;
+  font-weight: bold;
+  font-size: 1rem;
+  gap: 1rem;
+  background-color: rgba(31, 41, 55, 1);
+}
+
+.hamburger-menu-container a {
+  cursor: not-allowed;
+}
+
+.hamburger-menu-icon {
+  transition: 0.4s;
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 450px) {
+  .icons-container {
+    display: none;
+  }
+  .nav-button {
+    width: 60px;
+  }
+  .hamburger-menu {
+    display: block;
+  }
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px); /* Adjust blur intensity as needed */
+  z-index: -1; /* Ensure the backdrop is behind other content */
+  display: none; /* Initially hide the backdrop */
+}

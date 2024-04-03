@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0.5rem;
 }
 
 .dashboard-label {
@@ -18,7 +19,12 @@
   flex-direction: row;
 }
 
+.dashboard-icon-item span {
+  font-weight: bold;
+}
+
 .dashboard-icon-item img {
+  margin-right: 1rem;
   width: 30px;
   height: 25px;
 }
@@ -28,7 +34,7 @@
   flex-direction: column;
 }
 .accordion {
-  background-color: #d0a2f7;
+  background-color: #201b25;
   color: #ffffff;
   cursor: pointer;
   padding: 18px;
@@ -335,10 +341,64 @@
   .dashboard-heading-2 {
     display: block;
   }
-  .container{
+  .container {
     width: 100%;
   }
   .search-container {
     flex-direction: column;
   }
+}
+
+.overlay-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+
+.menu-content a {
+  display: block;
+  text-decoration: none;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.menu-content a:hover {
+  text-decoration: underline;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.close-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  /* color: #ffffff; */
+  cursor: pointer;
+  opacity: 0;
+}
+.ham-menu-icon {
+  opacity: 0;
 }

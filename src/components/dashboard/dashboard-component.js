@@ -6,6 +6,18 @@ import { toast } from "react-toastify";
 import "../progress-bar/progress-bar.scss";
 import gemImage from "../../images/gem.png";
 import potionImage from "../../images/potion.png";
+
+function numberWithCommas(number) {
+  if (typeof number === "boolean") {
+    return number ? "yes" : "no";
+  }
+  // Remove decimal part if it exists
+  number = Math.floor(number);
+
+  // Convert number to string and add commas
+  return number.toString().replace(/\d(?=(\d{3})+$)/g, "$&,");
+}
+
 const NumberBlock = ({
   label,
   value,
@@ -18,19 +30,21 @@ const NumberBlock = ({
       <span className="text-lg dashboard-label">
         <span>{label}&nbsp;</span>
       </span>
-      {dashboardState === "global" && label === "boosting" ? (
-        <div className="dashboard-icon-container mt-3">
+      {label === "boosting" || label === "boosters" ? (
+        <div className="dashboard-icon-container">
           <div className="dashboard-icon-item">
             <img src={gemImage} alt="gem"></img>
-            <span>- {gemCount} |&nbsp;</span>
+            <span> {gemCount} |&nbsp;</span>
           </div>
           <div className="dashboard-icon-item">
             <img src={potionImage} alt="potion"></img>
-            <span>- {potionCount}</span>
+            <span>{potionCount}</span>
           </div>
         </div>
       ) : (
-        <p className="text-base">{value}</p>
+        <p className="text-base">
+          {value === null ? 0 : numberWithCommas(value)}
+        </p>
       )}
     </div>
   );
@@ -108,9 +122,9 @@ const DashboardComponent = () => {
       });
       data.push({
         label: "boosting",
-        value: 3,
-        gemCount: 2,
-        potionCount: 3,
+        value: null,
+        gemCount: response["data"]["booster"]["rarity"],
+        potionCount: response["data"]["booster"]["juggernaut"],
       });
       data.push({
         label: "avg per block",
@@ -141,12 +155,17 @@ const DashboardComponent = () => {
       setBlockNumber(response["data"]["last_updated_block"]);
       setPercentage(
         (
-          ((840000 - response["data"]["last_updated_block"]) / 20000) *
+          (blockNumber / response["data"]["block_range"][1] -
+            response["data"]["block_range"][0]) *
           100
         ).toFixed(2)
       );
       setRemainingDays(
-        ((840000 - response["data"]["last_updated_block"]) / 144).toFixed()
+        (
+          (response["data"]["block_range"][1] -
+            response["data"]["last_updated_block"]) /
+          144
+        ).toFixed()
       );
       setLoading(false);
     } catch (error) {
@@ -176,9 +195,9 @@ const DashboardComponent = () => {
       });
       data.push({
         label: "boosters",
-        value: response["data"]["data"]["miners"],
-        gemCount: null,
-        potionCount: null,
+        value: null,
+        gemCount: response["data"]["data"]["booster"]["rarity"],
+        potionCount: response["data"]["data"]["booster"]["juggernaut"],
       });
       data.push({
         label: "apes",
@@ -217,7 +236,7 @@ const DashboardComponent = () => {
       });
       data.push({
         label: "claimed",
-        value: "o",
+        value: response["data"]["data"]["is_claimed"],
         gemCount: null,
         potionCount: null,
       });
