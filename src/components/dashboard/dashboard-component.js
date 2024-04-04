@@ -8,6 +8,9 @@ import gemImage from "../../images/gem.png";
 import potionImage from "../../images/potion.png";
 
 function numberWithCommas(number) {
+  if (typeof number === "string") {
+    return number;
+  }
   if (typeof number === "boolean") {
     return number ? "yes" : "no";
   }
@@ -42,9 +45,7 @@ const NumberBlock = ({
           </div>
         </div>
       ) : (
-        <p className="text-base">
-          {value === null ? 0 : numberWithCommas(value)}
-        </p>
+        <p className="text-base">{numberWithCommas(value)}</p>
       )}
     </div>
   );
@@ -88,10 +89,17 @@ const DashboardComponent = () => {
   const [toggleInfo, setToggleInfo] = useState(false);
   const [blockNumber, setBlockNumber] = useState(0);
   const [remainingDays, setRemainingDays] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const inputRef = useRef(null);
 
+  const checkIsMobile = () => {
+    setIsMobile(window.innerWidth < 600); // Adjust the width value as needed
+  };
+
   useEffect(() => {
+    checkIsMobile();
     fetchHoldersData();
+    window.addEventListener("resize", checkIsMobile);
     const handleClickOutside = (event) => {
       if (inputRef.current && !inputRef.current.contains(event.target)) {
         setError(false);
@@ -102,11 +110,13 @@ const DashboardComponent = () => {
     // Remove event listener on component unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("resize", checkIsMobile);
     };
   }, []);
 
   const fetchHoldersData = async () => {
-    const setData = async (response) => {
+    const setData = async (res) => {
+      const response = await res;
       const data = [];
       data.push({
         label: "total mined",
@@ -146,27 +156,31 @@ const DashboardComponent = () => {
       });
       return data;
     };
-
-    try {
-      setLoading(true);
-      const response = await axios.get("https://nodeape-api.onrender.com/api/");
-      setDashboardData(await setData(response));
-      setDashboardState("global");
-      setBlockNumber(response["data"]["last_updated_block"]);
-      setPercentage(
-        (
-          (blockNumber / response["data"]["block_range"][1] -
-            response["data"]["block_range"][0]) *
-          100
-        ).toFixed(2)
-      );
-      setRemainingDays(
-        (
+    const getPercentage = (response) => {
+      return (
+        ((response["data"]["last_updated_block"] -
+          response["data"]["block_range"][0]) /
           (response["data"]["block_range"][1] -
-            response["data"]["last_updated_block"]) /
-          144
-        ).toFixed()
-      );
+            response["data"]["block_range"][0])) *
+        100
+      ).toFixed(2);
+    };
+    setLoading(true);
+    try {
+      const response = await axios.get("https://nodeape-api.onrender.com/api/");
+      setBlockNumber(await response["data"]["last_updated_block"]);
+      const data = await setData(response);
+      setDashboardData(data);
+      setDashboardState("global");
+      const percentageValue = await getPercentage(response);
+      setPercentage(percentageValue);
+      const remainingDaysValue = (
+        (response["data"]["block_range"][1] -
+          response["data"]["last_updated_block"]) /
+        144
+      ).toFixed();
+      setRemainingDays(remainingDaysValue);
+
       setLoading(false);
     } catch (error) {
       console.error("Error fetching numbers:", error);
@@ -179,7 +193,8 @@ const DashboardComponent = () => {
       return;
     }
 
-    const setWalletData = async (response) => {
+    const setWalletData = async (res) => {
+      const response = await res;
       const data = [];
       data.push({
         label: "mined",
@@ -226,7 +241,8 @@ const DashboardComponent = () => {
       return data;
     };
 
-    const setMinerData = async (response) => {
+    const setMinerData = async (res) => {
+      const response = await res;
       const data = [];
       data.push({
         label: "mined",
@@ -236,7 +252,7 @@ const DashboardComponent = () => {
       });
       data.push({
         label: "claimed",
-        value: response["data"]["data"]["is_claimed"],
+        value: response["data"]["data"]["isClaimed"],
         gemCount: null,
         potionCount: null,
       });
@@ -278,6 +294,7 @@ const DashboardComponent = () => {
       }
 
       fetchHoldersData();
+      setDashboardState("global");
     }
     setSearchQuery("");
     setLoading(false);

@@ -34,7 +34,7 @@
   flex-direction: column;
 }
 .accordion {
-  background-color: #201b25;
+  background-color: #d0a2f7;
   color: #ffffff;
   cursor: pointer;
   padding: 18px;
@@ -279,6 +279,9 @@
   animation: shake 0.5s; /* Shake animation */
 }
 
+/* .search-container input::placeholder {
+  font-size: 12px;
+} */
 @keyframes shake {
   0% {
     transform: translateX(0);
@@ -346,6 +349,9 @@
   }
   .search-container {
     flex-direction: column;
+  }
+  .progress-heading {
+    font-size: 14px;
   }
 }
 
