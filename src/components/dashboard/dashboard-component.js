@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "../progress-bar/progress-bar.scss";
 import gemImage from "../../images/gem.png";
 import potionImage from "../../images/potion.png";
+import { ThreeDots } from "react-loader-spinner";
 
 function numberWithCommas(number) {
   if (typeof number === "string") {
@@ -158,10 +159,8 @@ const DashboardComponent = () => {
     };
     const getPercentage = (response) => {
       return (
-        ((response["data"]["last_updated_block"] -
-          response["data"]["block_range"][0]) /
-          (response["data"]["block_range"][1] -
-            response["data"]["block_range"][0])) *
+        (response["data"]["last_updated_block"] /
+          Number(response["data"]["block_range"][1])) *
         100
       ).toFixed(2);
     };
@@ -349,20 +348,46 @@ const DashboardComponent = () => {
                   setSearchQuery(e.target.value);
                   setError(false);
                 }}
+                disabled
               />
+
               <button
                 className="switch-button font-bold border-gray"
+                disabled
                 onClick={() => handleSearch(searchQuery)}
               >
                 check
+                <span className="tooltip absolute bg-gray-800 text-white text-xs px-2 py-1 rounded">
+                  view-only mode for first 24 hours
+                </span>
               </button>
             </div>
             <div className="info-container text-2xl">
-              {dashboardState === "global"
-                ? "runes: all stats"
-                : dashboardState === "wallet"
-                ? "runes: wallet stats"
-                : "runes: miner stats"}
+              {dashboardState === "global" ? (
+                <span>
+                  runes: all stats{" "}
+                  <span>
+                    [syncing{" "}
+                    <span className="loading-dots">
+                      <ThreeDots
+                        visible={true}
+                        height="20"
+                        width="20"
+                        color="#ff9900"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                      />
+                    </span>
+                    ]
+                  </span>
+                </span>
+              ) : dashboardState === "wallet" ? (
+                "runes: wallet stats"
+              ) : (
+                "runes: miner stats"
+              )}
             </div>
             <div className="numbers-container ">
               {dashboardData.map((item, index) => (

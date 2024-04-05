@@ -103,6 +103,23 @@
     0 3px 0 0 rgb(255, 255, 255, 0.3);
   transition: 0.4s;
 }
+.loading-dots {
+  display: inline-block;
+}
+
+.search-input:disabled {
+  cursor: not-allowed;
+}
+
+.switch-button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(255, 255, 255, 0.3);
+}
+
+.switch-button:disabled:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
 
 .search-input:hover {
   box-shadow: -3px 0 0 0 rgb(255, 255, 255), 3px 0 0 0 rgb(255, 255, 255),
@@ -155,7 +172,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: 0.4s;
-
+  position: relative;
   /* box-shadow: -3px 0 0 0 rgba(255, 153, 0, 0.7),
     3px 0 0 0 rgba(255, 153, 0, 0.7), 0 -3px 0 0 rgba(255, 153, 0, 0.7),
     0 3px 0 0 rgba(255, 153, 0, 0.7); */
